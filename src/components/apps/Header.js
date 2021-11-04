@@ -18,7 +18,7 @@ const Header = () => {
     }
 
     return (
-        <div className="ui secondary  menu">
+        <div className="ui secondary menu">
             <Link to="/home" className="active item">
             Home
             </Link>

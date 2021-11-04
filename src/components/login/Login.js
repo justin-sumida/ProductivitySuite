@@ -32,7 +32,7 @@ const Login = () => {
                         Login to your account
                     </div>
                 </h2>
-                <form className="ui large form error">
+                <form onSubmit={handleSubmit} className="ui large form error">
                     <div className="ui stacked segment">
                         <div className="field">
                             <div className="ui left icon input">
