@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
     const {logout} = useAuth();
     const history = useHistory();
 
@@ -19,13 +19,13 @@ const Header = () => {
 
     return (
         <div className="ui secondary menu">
-            <Link to="/home" className="active item">
+            <Link to="/home" className={`${props.link === 'todo' ? 'active' : ''} item`}>
             Home
             </Link>
-            <Link to="/goals" className="item">
+            <Link to="/goals" className={`${props.link === 'goals' ? 'active' : ''} item`}>
                 Goals
             </Link>
-            <Link to="/budget" className="item">
+            <Link to="/budget" className={`${props.link === 'budget' ? 'active' : ''} item`}>
                 Budget
             </Link>
             <div className="right menu">

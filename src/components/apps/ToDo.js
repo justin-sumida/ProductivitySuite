@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { db } from '../firebase/firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import ToDoList from './ToDoList';
-import './ToDo.css'
 
 const ToDo = () => {
     const { currentUser } = useAuth();
@@ -40,18 +39,25 @@ const ToDo = () => {
    
     return (
         <div className="form element">
-            <div className="ui form">
+            <div className="ui form segment">
                 <label>To Do Title</label>
                 <input ref={todoRef} type="text" />
                 <label>Description (optional)</label>
                 <input ref={descriptionRef} type="text" />
                 <label>Due On</label>
                 <input ref={dateRef} type="date"></input>
-                <button className="ui button primary" onClick={addTodo}>Add Todo</button>
+                <button className="ui button grey" style={{marginTop: 10}}onClick={addTodo}>Add Todo</button>
             </div>
-            {todos.map(todo => (
-                <ToDoList todo={todo} />
-            ))}
+            <div style={{marginTop: 10}} className="ui grid">
+                <div className="ten wide column">
+                    <div className="ui items">
+                    {todos.map(todo => (
+                        <ToDoList todo={todo} />
+                    ))}
+                    </div>
+                </div>
+            </div>
+            
         </div>
     );
 }

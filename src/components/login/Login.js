@@ -11,7 +11,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     async function handleSubmit(e) {
-        e.preventDefault();
+        //e.preventDefault();
         if (!validator.isEmail(emailRef.current.value)){
             setError("Invalid email address.");
         }

@@ -2,13 +2,13 @@ import React from "react";
 import Header from "./Header";
 import { useAuth } from "../../contexts/AuthContext";
 import ToDo from './ToDo';
+
 const MainPage = () => {
     const { currentUser } = useAuth();
-    console.log(currentUser._delegate);
     if (currentUser){
         return (
             <div className="ui container">
-                <Header></Header>
+                <Header link="todo"></Header>
                 <div>{`Welcome, ${currentUser ? currentUser._delegate.email : 'loading'}`}</div>
                 <ToDo />
             </div>
