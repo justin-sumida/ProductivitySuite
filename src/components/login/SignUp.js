@@ -10,7 +10,6 @@ const SignUp = () => {
     const { signup } = useAuth();
     const history = useHistory();
     const [error, setError] = useState("");
-    console.log(error);
     async function handleSubmit(e) {
         e.preventDefault();
         if (!validator.isEmail(emailRef.current.value)){
@@ -63,7 +62,7 @@ const SignUp = () => {
                                 <input type="password" placeholder="Confirm Password" ref={passwordConfirm}/>
                             </div>
                         </div>
-                        <div onClick={handleSubmit} className="ui fluid large grey submit button">Login</div>
+                        <button type="submit" onClick={handleSubmit} className="ui fluid large grey submit button">Sign Up</button>
                     </div>
                     <div className="ui error message active">{error}</div>
                 </form>

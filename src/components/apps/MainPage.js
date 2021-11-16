@@ -9,7 +9,6 @@ const MainPage = () => {
         return (
             <div className="ui container">
                 <Header link="todo"></Header>
-                <div>{`Welcome, ${currentUser ? currentUser._delegate.email : 'loading'}`}</div>
                 <ToDo />
             </div>
         );

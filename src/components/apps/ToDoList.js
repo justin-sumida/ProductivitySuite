@@ -30,6 +30,7 @@ const ToDoList = (props) => {
                 <div className="extra">
                     <Icon link onClick={updateTodo} name={`${props.todo.todo.isComplete ? 'check circle green icon': 'circle outline icon'}`}></Icon>
                     <Icon link onClick={event => {db.collection('todo').doc(props.todo.id).delete()}} name="trash alternate outline red icon"></Icon>
+                    <Icon link onClick={() => props.editMode(props.todo)} name="edit icon"></Icon>
                     <div className="ui label">Due On: {convertDate(props.todo.todo.dueOn)} </div>
                     
                 </div>

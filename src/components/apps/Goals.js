@@ -41,9 +41,9 @@ const Goals = () => {
                     <label>Goal</label>
                     <input ref={goalRef} type="text"></input>
                     <label>Description</label>
-                    <input ref={descriptionRef} type="text"></input>
+                    <input ref={descriptionRef} placeholder="Optional" type="text"></input>
                     <label>Priority</label>
-                    <input ref={priorityRef} type="number"></input>
+                    <input ref={priorityRef} placeholder="1 is highest priority" min="0" max="10" type="number"></input>
                     <button className="ui button grey" style={{marginTop: 10}} onClick={addGoal}>Add Goal</button>
                 </div>
                 <div className="ui items">

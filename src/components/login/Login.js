@@ -11,7 +11,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     async function handleSubmit(e) {
-        //e.preventDefault();
+        e.preventDefault();
         if (!validator.isEmail(emailRef.current.value)){
             setError("Invalid email address.");
         }
@@ -46,7 +46,7 @@ const Login = () => {
                                 <input type="password" ref={passswordRef} placeholder="Password" />
                             </div>
                         </div>
-                        <div onClick={handleSubmit} className="ui fluid large grey submit button">Login</div>
+                        <button type="submit" onClick={handleSubmit} className="ui fluid large grey submit button">Login</button>
                     </div>
                     <div className="ui error message">{error}</div>
                 </form>
