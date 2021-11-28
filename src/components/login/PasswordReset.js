@@ -3,13 +3,12 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import validator from 'validator';
 import './Login.css';
-const Login = () => {
+
+const PasswordReset = () => {
     const emailRef = useRef();
-    const passswordRef = useRef();
-    const { login } = useAuth();
+    const { passwordReset } = useAuth();
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const history = useHistory();
+    const [message, setMessage] = useState("");
     async function handleSubmit(e) {
         e.preventDefault();
         if (!validator.isEmail(emailRef.current.value)){
@@ -17,19 +16,26 @@ const Login = () => {
         }
         try {
             setError("");
-            setLoading(true);
-            await login(emailRef.current.value, passswordRef.current.value);
-            history.push('/home');
+            setMessage("")
+            await passwordReset(emailRef.current.value);
+            setMessage("Email was sent to " + emailRef.current.value + " please follow the instructions from the email.");
         } catch {
-            setError("Failed to log in. Username and password combination not found.");
+            setError("Failed to send email.");
         }
+    }
+
+    const determineMessage = () => {
+        if(message){
+            return <div className="ui positive message">{message}</div>
+        }
+        return null;
     }
     return (
         <div className="ui center aligned middle aligned grid" style={{height:'100vh'}}>
             <div className="column">
                 <h2 className="ui image header">
                     <div className="content">
-                        Login to your account
+                        Reset your password
                     </div>
                 </h2>
                 <form onSubmit={handleSubmit} className="ui large form error">
@@ -40,18 +46,13 @@ const Login = () => {
                                 <input type="text" ref={emailRef} placeholder="E-mail address" />
                             </div>
                         </div>
-                        <div className="field">
-                            <div className="ui left icon input">
-                                <i className="lock icon" />
-                                <input type="password" ref={passswordRef} placeholder="Password" />
-                            </div>
-                        </div>
-                        <button type="submit" onClick={handleSubmit} className="ui fluid large grey submit button">Login</button>
+                        <button type="submit" onClick={handleSubmit} className="ui fluid large blue submit button">Reset Password</button>
                         <div style={{marginTop: 10}}>
-                            <Link to="/forgot-password">Forgot Password?</Link>
+                            <Link to="/">Sign In</Link>
                         </div>
                     </div>
                     <div className="ui error message">{error}</div>
+                    {determineMessage()}
                 </form>
                 <div className="ui message">
                     New to us? 
@@ -62,4 +63,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default PasswordReset;

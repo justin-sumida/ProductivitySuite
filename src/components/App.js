@@ -6,6 +6,7 @@ import Goals from './apps/Goals';
 import Budget from './apps/Budget';
 import { AuthProvider } from '../contexts/AuthContext';
 import MainPage from './apps/MainPage';
+import PasswordReset from './login/PasswordReset';
 
 const App = () => {
     return (
@@ -25,6 +26,9 @@ const App = () => {
                 </Switch>
                 <Switch>
                     <Route path="/budget" component={Budget} />
+                </Switch>
+                <Switch>
+                    <Route path="/forgot-password" component={PasswordReset} />
                 </Switch>
             </AuthProvider>
         </Router>
