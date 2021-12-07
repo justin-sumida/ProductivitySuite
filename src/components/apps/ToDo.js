@@ -15,7 +15,7 @@ const ToDo = () => {
     var isComplete = false;
     useEffect(() => {
         var query = db.collection('todo');
-        query = query.where('userId', "==", currentUser._delegate.uid);
+        query = query.where('userId', "==", currentUser);
         query = query.orderBy('dueOn', 'asc');
         const unsubscribe = query.onSnapshot(snapshot => {
             setTodos(snapshot.docs.map(doc => ({id: doc.id, todo: doc.data()})));
@@ -41,7 +41,7 @@ const ToDo = () => {
                 description: descriptionRef.current.value,
                 dueOn: Number.isNaN(timestamp) ? 0 : timestamp,
                 todo: todoRef.current.value,
-                userId: currentUser._delegate.uid,
+                userId: currentUser,
                 isComplete: false
             });
         }
@@ -52,7 +52,7 @@ const ToDo = () => {
                 todo: todoRef.current.value,
                 description: descriptionRef.current.value,
                 dueOn: timestamp,
-                userId: currentUser._delegate.uid,
+                userId: currentUser,
                 isComplete: isComplete
             });
         }

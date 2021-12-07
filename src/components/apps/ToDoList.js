@@ -13,7 +13,7 @@ const ToDoList = (props) => {
             todo: props.todo.todo.todo,
             description: props.todo.todo.description,
             dueOn: props.todo.todo.dueOn,
-            userId: currentUser._delegate.uid,
+            userId: currentUser,
             isComplete: !props.todo.todo.isComplete
         })
     }

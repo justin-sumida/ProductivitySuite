@@ -15,7 +15,7 @@ const Budget = () => {
 
     useEffect(() => {
         var query = db.collection('budget');
-        query = query.where('userId', "==", currentUser._delegate.uid);
+        query = query.where('userId', "==", currentUser);
         query = query.orderBy('budgetValue', 'asc');
         const unsubscribe = query.onSnapshot(snapshot => {
             setBudgets(snapshot.docs.map(doc => ({id: doc.id, budgets: doc.data()})));
@@ -26,13 +26,13 @@ const Budget = () => {
 
     const addGoal = (e) => {
         e.preventDefault();
-        if(budget.id === ""){
+        if(!budget){
             db.collection('budget').add({
                 description: descriptionRef.current.value,
                 budget: budgetRef.current.value,
                 budgetValue: budgetValue.current.value ? budgetValue.current.value : '0',
                 budgetProgress: 0,
-                userId : currentUser._delegate.uid
+                userId : currentUser
             });
         } else {
             db.collection('budget').doc(budget.id).set({
@@ -40,7 +40,7 @@ const Budget = () => {
                 budget: budgetRef.current.value,
                 budgetValue: budgetValue.current.value,
                 budgetProgress: budget.budgets.budgetProgress,
-                userId : currentUser._delegate.uid
+                userId : currentUser
             });
         }
         clearValues();

@@ -1,15 +1,18 @@
 import React, {useRef, useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import firebase from 'firebase/compat/app';
+import "firebase/compat/auth";
 import { useAuth } from '../../contexts/AuthContext';
 import validator from 'validator';
 import './Login.css';
 const Login = () => {
     const emailRef = useRef();
     const passswordRef = useRef();
-    const { login } = useAuth();
+    const { login, setCurrentUser } = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+
     async function handleSubmit(e) {
         e.preventDefault();
         if (!validator.isEmail(emailRef.current.value)){
@@ -23,6 +26,19 @@ const Login = () => {
         } catch {
             setError("Failed to log in. Username and password combination not found.");
         }
+    }
+
+    const SignInWithFirebase = () => {
+        var googleProvider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(googleProvider)
+        .then((re) => {
+            setCurrentUser(re.additionalUserInfo.profile.id);
+            console.log(re);
+            history.push('/home');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
     }
     return (
         <div className="ui center aligned middle aligned grid" style={{height:'100vh'}}>
@@ -46,6 +62,9 @@ const Login = () => {
                                 <input type="password" ref={passswordRef} placeholder="Password" />
                             </div>
                         </div>
+                        <button className="ui google button red" type="button" style={{marginBottom: 10}} onClick={SignInWithFirebase}>
+                            <i className="google icon"/>
+                            Sign In With Google</button>
                         <button type="submit" onClick={handleSubmit} className="ui fluid large grey submit button">Login</button>
                         <div style={{marginTop: 10}}>
                             <Link to="/forgot-password">Forgot Password?</Link>

@@ -23,7 +23,7 @@ const BudgetList = (props) => {
             )
         }
         else{
-            return <div className="ui label">Budget Progress: {props.budget.budgets.budgetProgress === '0' ? '$0' : props.budget.budgets.budgetProgress}</div>;
+            return <div className="ui label">Budget Progress: {props.budget.budgets.budgetProgress === 0 ? '$0' : props.budget.budgets.budgetProgress}</div>;
         }
     }
 
@@ -34,7 +34,7 @@ const BudgetList = (props) => {
                 budget: props.budget.budgets.budget,
                 budgetValue: props.budget.budgets.budgetValue,
                 budgetProgress: budgetValue.current.value === '' ? props.budget.budgets.budgetProgress : budgetValue.current.value,
-                userId : currentUser._delegate.uid
+                userId : currentUser
             });
         }
         setBudgetEdit(!budgetEdit);

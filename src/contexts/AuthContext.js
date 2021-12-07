@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged( user => {
-            setCurrentUser(user);
+            setCurrentUser(user? user._delegate.uid: "");
             setLoading(false);
         })
 
@@ -39,6 +39,7 @@ export function AuthProvider({ children }) {
 
     const value = {
         currentUser,
+        setCurrentUser,
         login,
         signup,
         logout,

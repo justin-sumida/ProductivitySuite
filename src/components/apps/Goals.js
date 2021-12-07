@@ -14,7 +14,7 @@ const Goals = () => {
 
     useEffect(() => {
         var query = db.collection('goals');
-        query = query.where('userId', "==", currentUser._delegate.uid);
+        query = query.where('userId', "==", currentUser);
         query = query.orderBy('priority', 'asc');
         const unsubscribe = query.onSnapshot(snapshot => {
             setGoals(snapshot.docs.map(doc => ({id: doc.id, goals: doc.data()})));
@@ -29,14 +29,14 @@ const Goals = () => {
                 description: descriptionRef.current.value,
                 goal: goalRef.current.value,
                 priority: priorityRef.current.value === '' ? 0 : priorityRef.current.value,
-                userId : currentUser._delegate.uid
+                userId : currentUser
             });
         } else {
             db.collection('goals').doc(goalId).set({
                 description: descriptionRef.current.value,
                 goal: goalRef.current.value,
                 priority: priorityRef.current.value === '' ? 0 : priorityRef.current.value,
-                userId : currentUser._delegate.uid
+                userId : currentUser
             });
         }
         clearValues();
